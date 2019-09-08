@@ -1,0 +1,44 @@
+%{
+#include <math.h>
+%}
+
+INTLITERAL      [0-9]+
+FLOATLITERAL    [0-9]*\.+[0-9]+
+STRINGLITERAL   (["'])(?:(?=(\\?))\2.)*\1
+ID              [a-z]+[a-z0-9]*
+
+%%
+	
+{INTLITERAL}+  {
+            printf( "Token Type: INTLITERAL\n Value: (%d)\n", yytext );
+            }
+
+{FLOATLITERAL}+ {
+            printf( "Token Type: FLOATLITERAL\n Value: %s (%g)\n", yytext );
+            }
+
+prog|begin|end|func|read|write|if|else|endif|while|endwhile|return|int|void|str|float|true|false|for|in|range|endfor|continue|break        {
+            printf( "Token Type: KEYWORD\n Value: %s\n", yytext );
+            }
+
+{ID}        printf( "Token Type: IDENTIFIER\n Value: %s\n", yytext );
+
+[+|-|*|/|==|!=|<|>|(|)|;|,|<=|>=]   {
+            printf( "Token Type: OPERATOR\n Value: %s\n", yytext );
+            }
+
+%%
+
+int yywrap(){}
+main( argc, argv )
+int argc;
+char **argv;
+    {
+    ++argv, --argc;  /* skip over program name */
+    if ( argc > 0 )
+            yyin = fopen( argv[0], "r" );
+    else
+            yyin = stdin;
+
+    yylex();
+    }
