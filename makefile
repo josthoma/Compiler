@@ -4,7 +4,7 @@ compiler:
 clean:
 	rm -rf a.out
 	rm -rf lex.yy.c
-	rm -rf *.txt
+	rm -rf output.txt
 
 team:
 	@echo "Team : team_alpha"
