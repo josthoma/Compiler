@@ -1,4 +1,3 @@
-# 573-fa2019-team_alpha
 Steps to run :
 1. Scanner Regex defined in grammar file
 2. Use make compiler to generate the grammar and obtain the c file
